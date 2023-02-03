@@ -2,6 +2,7 @@ package driver
 
 import (
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -31,6 +32,9 @@ type File struct {
 	CreateTime time.Time
 	// Update time of the file.
 	UpdateTime time.Time
+
+	// Thumb URL 800x600
+	ThumbURL string
 }
 
 func (f *File) from(fileInfo *FileInfo) *File {
@@ -68,6 +72,7 @@ func (f *File) from(fileInfo *FileInfo) *File {
 
 	f.CreateTime = time.Unix(int64(fileInfo.CreateTime), 0)
 
+	f.ThumbURL = strings.Replace(fileInfo.Thumb, "_100?s=", "_800?s=", 1)
 	return f
 }
 
@@ -93,4 +98,8 @@ func (f File) IsDir() bool {
 
 func (f File) GetID() string {
 	return f.FileID
+}
+
+func (f File) Thumb() string {
+	return f.ThumbURL
 }

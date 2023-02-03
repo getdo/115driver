@@ -103,6 +103,8 @@ type FileInfo struct {
 
 	CreateTime StringInt64 `json:"tp"`
 	UpdateTime string      `json:"t"`
+
+	Thumb string `json:"u"`
 }
 
 type LabelInfo struct {
